@@ -1,0 +1,126 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #fafafa;
+  color: #da0948;
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.img {
+  display: block;
+  max-width: 100%;
+}
+
+.gallery {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  padding: 30px;
+  margin-top: 160px;
+  justify-content: center;
+}
+
+.photo-thumb {
+  height: 170px;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-card {
+  max-width: 250px;
+  min-height: 208px;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.25);
+  flex-basis: calc((100% - 4 * 40px) / 5);
+
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.photo-card:hover {
+  transform: scale(1.1);
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  padding: 18px;
+}
+
+.info-item {
+  font-size: 10px;
+  text-align: center;
+}
+
+.section-form {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 150px;
+  background-color: white;
+  background-image: linear-gradient(
+    to right,
+    rgba(227, 20, 20, 0.4),
+    rgba(156, 18, 194, 0.4)
+  );
+  background-position: center;
+  padding: 60px;
+  box-shadow: 0px 2px 12px rgb(211, 69, 69);
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.input-form {
+  display: block;
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  border: 5px solid rgb(219, 64, 141);
+  padding: 5px;
+  margin-right: 10px;
+  outline: #c7d413;
+}
+
+.form-button {
+  display: block;
+  height: 100%;
+  width: 20%;
+  cursor: pointer;
+  border-radius: 15px;
+  border: 1px solid rgb(226, 28, 144);
+  background-color: white;
+  color: rgb(233, 14, 145);
+  font-size: 18px;
+}
