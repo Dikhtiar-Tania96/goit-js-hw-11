@@ -46,7 +46,7 @@ async function getPhotos(query, page) {
 }
 
 form.addEventListener('submit', onSubmit);
-function onSubmit(evt) {
+  async function onSubmit(evt) {
   evt.preventDefault();
   page = 1;
   searchQuery = evt.currentTarget.elements.searchQuery.value.trim();
@@ -58,8 +58,8 @@ function onSubmit(evt) {
     return;
   }
 
-  getPhotos(searchQuery, page)
-    .then(data => {
+  try {
+    const data = await getPhotos(searchQuery, page)
       totalPages = Math.ceil(data.totalHits / per_page);
 
       if (!data.hits.length) {
@@ -80,27 +80,32 @@ function onSubmit(evt) {
         console.log(totalPages);
         observer.observe(guard);
       }
-    })
-    .catch(err => console.log(err));
+  } catch (error) {
+    console.log(error)
+  } 
 }
 
 function onInfinityScroll(entries, observer) {
-  entries.forEach(entry => {
+  entries.forEach(async entry => {
     if (entry.isIntersecting) {
       page += 1;
       console.log(entry);
-      getPhotos(searchQuery, page).then(data => {
-        gallery.insertAdjacentHTML('beforeend', createMarkup(data.hits));
-        simplelightbox.refresh();
-
-        totalPages = Math.ceil(data.totalHits / per_page);
-        if (page === totalPages) {
-          observer.unobserve(guard);
-          Notiflix.Notify.info(
-            'We are sorry, but you have reached the end of search results.'
-          );
-        }
-      });
+      try {
+        const data = await getPhotos(searchQuery, page)
+          gallery.insertAdjacentHTML('beforeend', createMarkup(data.hits));
+          simplelightbox.refresh();
+  
+          totalPages = Math.ceil(data.totalHits / per_page);
+          if (page === totalPages) {
+            observer.unobserve(guard);
+            Notiflix.Notify.info(
+              'We are sorry, but you have reached the end of search results.'
+            );
+          }
+      } catch (error) {
+        console.log(error)
+      }
+     
     }
   });
 }
